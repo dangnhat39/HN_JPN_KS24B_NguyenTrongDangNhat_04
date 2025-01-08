@@ -42,7 +42,7 @@ void showUserLoginScreen() {
     printf("Email: test@gmail.com\n");  
     printf("Password: *****\n");  
     printf("===================================\n");  
-    printf("[0] Back to Main Menu\n");  
+    printf("Press any number to return to the Menu\n");  
     
     int choice;  
     int valid = 0;
@@ -341,6 +341,30 @@ void addUser() {
     userCount++;  
     printf("\nUser added successfully!\n");  
     saveUsersToBinaryFile("users.bin");
+    printf("Press any number to return to the menu\n");  
+    int choice;  
+    valid = 0;
+    do {
+        char inputBuffer[10];
+        printf("Enter your choice: ");
+        fgets(inputBuffer, sizeof(inputBuffer), stdin);
+
+        inputBuffer[strcspn(inputBuffer, "\n")] = '\0'; 
+
+        if (strlen(inputBuffer) == 0) {
+            printf("Error: Choice cannot be empty. Please try again.\n");
+            continue;
+        }
+
+        if (sscanf(inputBuffer, "%d", &choice) != 1) {
+            printf("Error: Invalid input. Please enter a number.\n");
+            continue;
+        }
+
+        valid = 1; 
+    } while (!valid); 
+    system("cls"); 
+    if (choice == 0) return;  
 }   
 
 void showAllUsers() {  
@@ -366,7 +390,7 @@ void showAllUsers() {
     }  
 
     printf("========================================================================================\n");  
-    printf("[0] Back to Main Menu\n");  
+    printf("Press any number to return to the menu\n");  
     int choice;  
     int valid = 0;
     do {
@@ -388,7 +412,7 @@ void showAllUsers() {
 
         valid = 1; 
     } while (!valid);
-//    system("cls"); 
+   system("cls"); 
     if (choice == 0) return;  
 }  
 
@@ -441,7 +465,7 @@ void searchUserByName() {
         printf("No users found!\n");  
     }  
 
-    printf("[0] Back to Main Menu\n");  
+    printf("Press any number to return to the menu\n");  
     int choice;  
     valid = 0;
     do {
@@ -463,7 +487,7 @@ void searchUserByName() {
 
         valid = 1; 
     } while (!valid); 
-//    system("cls"); 
+    system("cls"); 
     if (choice == 0) return;  
 }  
 
@@ -513,7 +537,7 @@ void searchUserByID() {
         printf("No user found with ID %s\n", searchID);  
     }  
 
-    printf("[0] Back to Main Menu\n");  
+    printf("Press any number to return to the Menu\n");  
     int choice;  
     valid = 0;
     do {
@@ -762,6 +786,7 @@ void showAdminMenu() {
     }
 	
     do {
+	
         printf("***Bank Management System Using C***\n");
         printf("=======================================\n");
         printf("[1] Add User\n");
@@ -795,7 +820,7 @@ void showAdminMenu() {
 
             valid = 1; 
         } while (!valid);
-
+		system("cls");
         switch (choice) {
             case 1:
                 addUser();
